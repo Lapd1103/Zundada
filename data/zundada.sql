@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2023 a las 12:11:25
+-- Tiempo de generación: 05-11-2023 a las 03:59:14
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.1.17
 
@@ -77,7 +77,14 @@ INSERT INTO `cliente` (`idCliente`, `Cedula`, `idUsuarioCliente`) VALUES
 (7, 1000000007, 7),
 (8, 1000000008, 8),
 (9, 1000000009, 9),
-(10, 1000000010, 10);
+(10, 1000000010, 10),
+(11, 0, 25),
+(12, 123, 27),
+(13, 123456, 28),
+(14, 123, 29),
+(15, 123, 30),
+(16, 123, 32),
+(17, 23, 34);
 
 -- --------------------------------------------------------
 
@@ -90,24 +97,25 @@ CREATE TABLE `evento` (
   `lugar` varchar(60) NOT NULL,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
-  `numeroboletas` int(11) NOT NULL
+  `numeroboletas` int(11) NOT NULL,
+  `Bdisponibles` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `evento`
 --
 
-INSERT INTO `evento` (`idEvento`, `lugar`, `fecha`, `hora`, `numeroboletas`) VALUES
-(1, 'Lugar1', '2023-11-01', '17:30:00', 50),
-(2, 'Lugar2', '2023-11-12', '18:30:00', 20),
-(3, 'Lugar3', '2023-11-13', '20:00:00', 100),
-(4, 'Lugar4', '2023-11-14', '10:30:00', 150),
-(5, 'Lugar5', '2023-11-15', '12:30:00', 250),
-(6, 'Lugar6', '2023-11-16', '16:00:00', 50),
-(7, 'Lugar7', '2023-11-17', '16:30:00', 150),
-(8, 'Lugar8', '2023-11-18', '15:30:00', 100),
-(9, 'Lugar9', '2023-11-19', '10:00:00', 120),
-(10, 'Lugar10', '2023-11-20', '09:30:00', 80);
+INSERT INTO `evento` (`idEvento`, `lugar`, `fecha`, `hora`, `numeroboletas`, `Bdisponibles`) VALUES
+(1, 'Lugar1', '2023-11-01', '17:30:00', 50, 10),
+(2, 'Lugar2', '2023-11-12', '18:30:00', 20, 15),
+(3, 'Lugar3', '2023-11-13', '20:00:00', 100, 5),
+(4, 'Lugar4', '2023-11-14', '10:30:00', 150, 8),
+(5, 'Lugar5', '2023-11-15', '12:30:00', 250, 100),
+(6, 'Lugar6', '2023-11-16', '16:00:00', 50, 15),
+(7, 'Lugar7', '2023-11-17', '16:30:00', 150, 120),
+(8, 'Lugar8', '2023-11-18', '15:30:00', 100, 35),
+(9, 'Lugar9', '2023-11-19', '10:00:00', 120, 33),
+(10, 'Lugar10', '2023-11-20', '09:30:00', 80, 0);
 
 -- --------------------------------------------------------
 
@@ -141,13 +149,37 @@ INSERT INTO `organizador` (`idOrganizador`, `organizacion`, `telefono`, `idUsuar
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int(11) UNSIGNED NOT NULL,
+  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `sessions`
+--
+
+INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
+('6GlvxbEM2UhbX2KYujhq-1QVY_0DGKMk', 1699223346, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('9KRFNg-zZV4WFsBN8xLo65eZbKTU71--', 1699223346, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('9tkTMX5nMmS4jeZQhJlvcy63O5GXA4a0', 1699223346, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('R1kZf4tu9-t7s5nZZFyIysemkvjcsOr6', 1699238483, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":34},\"flash\":{}}'),
+('dkaR2D1WNWh577xIveD1rPXtV-iojOIx', 1699223346, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('scGg5lQsQRu64QZ6FUMf3RDdL1OdcNb-', 1699223346, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuario`
 --
 
 CREATE TABLE `usuario` (
   `idUsuario` int(11) NOT NULL,
   `Nombre` varchar(40) NOT NULL,
-  `usuario` varchar(20) NOT NULL,
+  `Usuario` varchar(20) NOT NULL,
   `Clave` varchar(40) NOT NULL,
   `Correo` varchar(200) NOT NULL,
   `Rol` enum('Administrador','Organizador','Cliente') NOT NULL
@@ -157,7 +189,7 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `Nombre`, `usuario`, `Clave`, `Correo`, `Rol`) VALUES
+INSERT INTO `usuario` (`idUsuario`, `Nombre`, `Usuario`, `Clave`, `Correo`, `Rol`) VALUES
 (1, 'Ana', 'ana_12', 'Contrasela1', 'anamaria@gmail.com', 'Cliente'),
 (2, 'Amanda', 'user123', 'Contrasela2', 'amandacastro@gmail.com', 'Cliente'),
 (3, 'Miranda', 'mLozano', 'Contrasela3', 'mirandela@gmail.com', 'Cliente'),
@@ -178,7 +210,16 @@ INSERT INTO `usuario` (`idUsuario`, `Nombre`, `usuario`, `Clave`, `Correo`, `Rol
 (18, 'Dafne Herrera', 'cicadas', 'Contrasela18', 'TeatroEscuelaMilitar@gmail.com', 'Organizador'),
 (19, 'Diego Rojas', 'hawthornegrill', 'Contrasela19', 'MusicaDistrital@gmail.com', 'Organizador'),
 (20, 'Javier Arevalo', 'monkscafes', 'Contrasela20', 'EmprendimientosUN@gmail.com', 'Organizador'),
-(21, 'Laura', 'alefit', 'Contrasela21', 'Laurachan@gmail.com', 'Administrador');
+(21, 'Laura', 'alefit', 'Contrasela21', 'Laurachan@gmail.com', 'Administrador'),
+(25, 'Laura Paez', 'Laura', '$2a$10$GEobUXUJfqslFYTgGEwTmOTghuCWeePaN', 'lolaloa', 'Cliente'),
+(27, 'pepito perez', 'Pepito', '$2a$10$QSA4XwEeZvwmJhVjRnCfFe7g3VgbOSgUF', 'pepe@gmail.com', 'Cliente'),
+(28, 'prueba3', 'Prueba', '$2a$10$.ozaFa04TxI5CmfmfiJ0GOBKzepGmJuuu', 'pruebas@gmail.com', 'Cliente'),
+(29, 'Administrador', 'Admin', '$2a$10$8PaBddte/jtBlGarlMDPNeFYzPdWriu4c', 'pruebas@gmail.com', 'Cliente'),
+(30, 'Laura', 'l', '$2a$10$.5XLSsBG1qDRfFZ0Y7pLPuqKEjdPeE4iy', 'aleja@unal.edu.co', 'Cliente'),
+(31, 'prueba12', 'PRUEBA', '123', 'aleja', 'Cliente'),
+(32, '123', 'Perry', 'perrys', 'sdsfl@gmail.com', 'Cliente'),
+(33, '123', 'Perry', 'perrys', 'sdsfl@gmail.com', 'Cliente'),
+(34, 'alonso Fonseca', 'alonso', '123', '123', 'Cliente');
 
 --
 -- Índices para tablas volcadas
@@ -213,6 +254,12 @@ ALTER TABLE `organizador`
   ADD KEY `idUsuarioOrganizacion` (`idUsuarioOrganizacion`);
 
 --
+-- Indices de la tabla `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`session_id`);
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -232,7 +279,7 @@ ALTER TABLE `boleta`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `evento`
@@ -250,7 +297,7 @@ ALTER TABLE `organizador`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Restricciones para tablas volcadas

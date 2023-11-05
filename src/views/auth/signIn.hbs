@@ -1,0 +1,42 @@
+<div class="login-container full-cover-background">
+    <div class="form-container">
+        <p class="text-center icon-registro" style="margin-top: 17px;">
+           <i class="zmdi zmdi-account-add zmdi-hc-5x"></i>
+       </p>
+       <h4 class="text-center all-tittles" style="margin-bottom: 30px;">Registrate como Cliente</h4>
+       <form action="/signIn" method="POST">
+            <div class="group-material-login">
+              <input type="text" name="usuario" class="material-login-control" required="" maxlength="20" autofocus>
+              <span class="highlight-login"></span>
+              <span class="bar-login"></span>
+              <label><i class="zmdi zmdi-account"></i> &nbsp; Nombre de usuario</label>
+            </div><br>
+            <div class="group-material-login">
+              <input type="password" name="clave" class="material-login-control" required="" maxlength="40">
+              <span class="highlight-login"></span>
+              <span class="bar-login"></span>
+              <label><i class="zmdi zmdi-lock"></i> &nbsp; Contraseña</label>
+            </div>
+            <div class="group-material-login">
+              <input type="text" name="nombre" class="material-login-control" required="" maxlength="40">
+              <span class="highlight-login"></span>
+              <span class="bar-login"></span>
+              <label><i class="zmdi zmdi-face"></i> &nbsp; Nombre completo</label>
+            </div><br>
+            <div class="group-material-login">
+              <input type="text" name="correo" class="material-login-control" required="" maxlength="200">
+              <span class="highlight-login"></span>
+              <span class="bar-login"></span>
+              <label><i class="zmdi zmdi-email"></i> &nbsp; Correo</label>
+            </div><br>
+            <div class="group-material-login">
+              <input type="number" name="cedula" class="material-login-control" required="" maxlength="11">
+              <span class="highlight-login"></span>
+              <span class="bar-login"></span>
+              <label><i class="zmdi zmdi-assignment-account"></i> &nbsp; Cédula</label>
+            </div><br>
+            
+            <button class="btn-login" type="submit">Registrarse &nbsp; <i class="zmdi zmdi-arrow-right"></i></button>
+        </form>
+    </div>   
+  </div>
