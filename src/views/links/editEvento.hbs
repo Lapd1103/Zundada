@@ -1,0 +1,89 @@
+{{> nav-lat }}
+<div class="content-page-container full-reset custom-scroll-containers">
+    {{> nav-sup}}
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="all-tittles">Sistema de eventos universitarios <small>Añadir evento</small></h1>
+        </div>
+    </div>
+    <div class="conteiner-fluid">
+        <ul class="nav nav-tabs nav-justified"  style="font-size: 17px;">
+            <li role="presentation" class="active"><a href="/registroEvento">Registro</a></li>
+            <li role="presentation"><a href="/listaEventos">Lista de eventos</a></li>
+        </ul>
+    </div>
+    <div class="container-fluid"  style="margin: 50px 0;">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-3">
+                <img src="assets/img/flat-book.png" alt="pdf" class="img-responsive center-box" style="max-width: 110px;">
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
+                Bienvenido a la sección para agregar nuevos eventos a zundada, deberas de llenar todos los campos para poder registrar el evento
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="container-flat-form">
+            <div class="title-flat-form title-flat-blue">Nuevo evento</div>
+            <form class="form-padding" method="POST">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <legend><i class="zmdi zmdi-account-box"></i> &nbsp; Información básica</legend><br>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="group-material">
+                            <input type="text" value="{{evento.nombre}}" name="nombre" class="tooltips-general material-control" placeholder="Escribe aquí el nombre del evento" required="" maxlength="20" data-toggle="tooltip" data-placement="top" title="Escribe el nombre del evento">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Nombre</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="group-material">
+                            <input type="text" value="{{evento.lugar}}" name="lugar" class="tooltips-general material-control" placeholder="Escribe aquí el lugar del evento" required="" maxlength="60" data-toggle="tooltip" data-placement="top" title="Escribe el lugar del evento">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Lugar</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="group-material">
+                            <input type="date" value="{{evento.fecha}}" name="fecha" class="tooltips-general material-control" placeholder="Escribe aquí la fecha del evento" required="" data-toggle="tooltip" data-placement="top" title="Escribe la fecha del evento">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Fecha</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="group-material">
+                            <input type="time" value="{{evento.hora}}" name="hora" class="tooltips-general material-control" placeholder="Escribe aquí la fecha del evento" required="" data-toggle="tooltip" data-placement="top" title="Escribe la fecha del evento">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Hora</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <legend><i class="zmdi zmdi-label"></i> &nbsp; Otros datos</legend><br>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="group-material">
+                            <input type="number" value="{{evento.numeroboletas}}" name="numeroboletas" class="material-control tooltips-general" placeholder="Escribe aquí el número de boletas disponibles del evento" required=""  data-toggle="tooltip" data-placement="top" title="Solamente números, sin espacios">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Número de boletas</label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xs-12">
+                        <p class="text-center">
+                            <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
+                            <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{> footer }}
+</div>

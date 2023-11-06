@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-11-2023 a las 03:59:14
+-- Tiempo de generación: 06-11-2023 a las 01:33:31
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.1.17
 
@@ -94,6 +94,7 @@ INSERT INTO `cliente` (`idCliente`, `Cedula`, `idUsuarioCliente`) VALUES
 
 CREATE TABLE `evento` (
   `idEvento` int(11) NOT NULL,
+  `nombre` varchar(20) NOT NULL,
   `lugar` varchar(60) NOT NULL,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
@@ -105,17 +106,17 @@ CREATE TABLE `evento` (
 -- Volcado de datos para la tabla `evento`
 --
 
-INSERT INTO `evento` (`idEvento`, `lugar`, `fecha`, `hora`, `numeroboletas`, `Bdisponibles`) VALUES
-(1, 'Lugar1', '2023-11-01', '17:30:00', 50, 10),
-(2, 'Lugar2', '2023-11-12', '18:30:00', 20, 15),
-(3, 'Lugar3', '2023-11-13', '20:00:00', 100, 5),
-(4, 'Lugar4', '2023-11-14', '10:30:00', 150, 8),
-(5, 'Lugar5', '2023-11-15', '12:30:00', 250, 100),
-(6, 'Lugar6', '2023-11-16', '16:00:00', 50, 15),
-(7, 'Lugar7', '2023-11-17', '16:30:00', 150, 120),
-(8, 'Lugar8', '2023-11-18', '15:30:00', 100, 35),
-(9, 'Lugar9', '2023-11-19', '10:00:00', 120, 33),
-(10, 'Lugar10', '2023-11-20', '09:30:00', 80, 0);
+INSERT INTO `evento` (`idEvento`, `nombre`, `lugar`, `fecha`, `hora`, `numeroboletas`, `Bdisponibles`) VALUES
+(1, 'Hallowen fest', 'Lugar1', '2023-11-01', '17:30:00', 50, 10),
+(2, 'Weekfest', 'Lugar2', '2023-11-12', '18:30:00', 20, 15),
+(3, 'Parranda', 'Lugar3', '2023-11-13', '20:00:00', 100, 5),
+(4, 'Portfiesta', 'Lugar4', '2023-11-14', '10:30:00', 150, 8),
+(5, 'Juernes Freud', 'Lugar5', '2023-11-15', '12:30:00', 250, 100),
+(6, 'Nombre6', 'Lugar6', '2023-11-16', '16:00:00', 50, 15),
+(7, 'Nombre7', 'Lugar7', '2023-11-17', '16:30:00', 150, 120),
+(8, 'Nombre8', 'Lugar8', '2023-11-18', '15:30:00', 100, 35),
+(9, 'Nombre9', 'Lugar9', '2023-11-19', '10:00:00', 120, 33),
+(10, 'Nombre10', 'Lugar10', '2023-11-20', '09:30:00', 80, 0);
 
 -- --------------------------------------------------------
 
@@ -163,12 +164,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('6GlvxbEM2UhbX2KYujhq-1QVY_0DGKMk', 1699223346, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('9KRFNg-zZV4WFsBN8xLo65eZbKTU71--', 1699223346, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('9tkTMX5nMmS4jeZQhJlvcy63O5GXA4a0', 1699223346, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('R1kZf4tu9-t7s5nZZFyIysemkvjcsOr6', 1699238483, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":34},\"flash\":{}}'),
-('dkaR2D1WNWh577xIveD1rPXtV-iojOIx', 1699223346, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('scGg5lQsQRu64QZ6FUMf3RDdL1OdcNb-', 1699223346, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}');
+('R1kZf4tu9-t7s5nZZFyIysemkvjcsOr6', 1699239583, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":34},\"flash\":{}}'),
+('hK9O4V9Nh-p0JvxPB1eZrgD4W4kVP4i8', 1699317122, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":1},\"flash\":{}}');
 
 -- --------------------------------------------------------
 

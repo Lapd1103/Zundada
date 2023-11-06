@@ -1,0 +1,67 @@
+{{> nav-lat }}
+<div class="content-page-container full-reset custom-scroll-containers">
+    {{> nav-sup }}
+    <div class="container">
+        <div class="page-header">
+            <h1 class="all-tittles">Sistema de eventos universitarios <small>Lista de eventos</small></h1>
+        </div>
+    </div>
+    <div class="conteiner-fluid">
+        <ul class="nav nav-tabs nav-justified"  style="font-size: 17px;">
+            <li role="presentation"><a href="/registroEvento">Registro</a></li>
+            <li role="presentation" class="active"><a href="/listaEventos">Lista de eventos</a></li>
+        </ul>
+    </div>
+    <div class="container-fluid"  style="margin: 40px 0;">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-3">
+                <img src="assets/img/checklist.png" alt="pdf" class="img-responsive center-box" style="max-width: 110px;">
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
+                Bienvenido al catálogo, si deseas buscar un evento por nombre has click en el icono &nbsp; <i class="zmdi zmdi-search"></i> &nbsp; que se encuentra en la barra superior
+            </div>
+        </div>
+    </div>
+    <form class="pull-right" style="width: 30% !important;" autocomplete="off">
+        <div class="group-material">
+            <input type="search" style="display: inline-block !important; width: 70%;" class="material-control tooltips-general" placeholder="Buscar personal" required="" pattern="[a-zA-ZáéíóúÁÉÍÓÚ ]{1,50}" maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe los nombres, sin los apellidos">
+            <button class="btn" style="margin: 0; height: 43px; background-color: transparent !important;">
+                <i class="zmdi zmdi-search" style="font-size: 25px;"></i>
+            </button>
+        </div>
+    </form>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 lead">
+                <ol class="breadcrumb">
+                    <li><a href="/listaEventos">Más reciente</a></li>
+                    <li class="active"><a href="/listaEventosPriority">N° de boletas</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+
+        {{#each eventos}}
+            <div class="media media-hover">
+                <div class="media-left media-middle">
+                    <a href="#!" class="tooltips-general" data-toggle="tooltip" data-placement="right" title="Más información del libro">
+                        <img class="media-object" src="assets/img/book.png" alt="Libro" width="48" height="48">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading"><strong>{{idEvento}} - {{nombre}}</h4>
+                    <div class="pull-left">
+                        Boletas disponibles: {{Bdisponibles}}<br>
+                        Lugar: {{lugar}}<br>
+                        Fecha: {{fecha}} - Hora: {{hora}}<br>
+                    </div>
+                    <p class="text-center pull-right">
+                        <a href="#!" class="btn btn-info btn-xs" style="margin-right: 10px;"><i class="zmdi zmdi-info-outline"></i> &nbsp;&nbsp; Más información</a>
+                    </p>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+    {{> footer }}
+</div>
