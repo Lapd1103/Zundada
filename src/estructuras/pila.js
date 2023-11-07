@@ -115,7 +115,11 @@ module.exports = class Pila {
         this.setArray(arrayOr);
       return newArray;
     }
-  
+    
+    getArr() {
+      return this.arr;
+    }
+
     setArray(array) {
       this.arr = array;
     }

@@ -1,9 +1,13 @@
 const express = require('express');
 const pila = require('../estructuras/pila');
+const minHeap = require('../estructuras/minHeap');
 const router = express.Router();
 
-let pilaEventos = new pila(1000);
+let n = 1000;
+let pilaEventos = new pila(n);
 pilaEventos.loadData('evento');
+
+let heapEventos = new minHeap(n);
 
 //Conexión base de datos
 const pool = require('../database');
@@ -21,7 +25,7 @@ router.get('/registroEvento',(req, res) =>{
 router.post('/registroEvento',(req, res) =>{
     const {nombre, lugar, fecha, hora, numeroboletas} = req.body;
     const newEvento ={
-        idEvento: pilaEventos.peek().idEvento+1,
+        idEvento: pilaEventos.peek().idEvento +1,
         nombre,
         lugar,
         fecha,
@@ -38,7 +42,10 @@ router.get('/listaEventos',(req, res) =>{   //Consulta de eventos por orden de c
 });
 
 router.get('/listaEventosPriority',(req, res) =>{   //Consulta de eventos por prioridad
-    res.render('links/listaEventosPriority',{eventos: pilaEventos.getArray()});
+    //pilaEventos.updateDB("evento"); //Actualizacion BD desde Pila
+    heapEventos.loadData(); //Cargan los datos desde BD a minHeap
+    
+    res.render('links/listaEventosPriority',{eventos: heapEventos.getData()});
 });
 
 router.get('/deleteEvento/:id', async(req, res) => {
