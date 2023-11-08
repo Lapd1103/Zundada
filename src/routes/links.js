@@ -1,13 +1,18 @@
 const express = require('express');
+const router = express.Router();
+
 const pila = require('../estructuras/pila');
 const minHeap = require('../estructuras/minHeap');
-const router = express.Router();
+const BinarySearchTree = require('../estructuras/BST');
 
 let n = 1000;
 let pilaEventos = new pila(n);
 pilaEventos.loadData('evento');
 
 let heapEventos = new minHeap(n);
+
+let eventosBST = new BinarySearchTree();
+
 
 //Conexión base de datos
 const pool = require('../database');
@@ -41,10 +46,16 @@ router.get('/listaEventos',(req, res) =>{   //Consulta de eventos por orden de c
     res.render('links/listaEventos',{eventos: pilaEventos.getArray()});
 });
 
+/*router.post('/listaEventos', (req, res) => {    //Consulta por nombre evento BST
+    eventosBST.loadData();
+    //console.log(eventosBST.getRoot().getRightChild());
+    res.send(req.body);
+});*/
+
 router.get('/listaEventosPriority',(req, res) =>{   //Consulta de eventos por prioridad
     //pilaEventos.updateDB("evento"); //Actualizacion BD desde Pila
     heapEventos.loadData(); //Cargan los datos desde BD a minHeap
-    
+
     res.render('links/listaEventosPriority',{eventos: heapEventos.getData()});
 });
 
@@ -75,6 +86,8 @@ router.post('/editEvento/:id', (req, res) => {
     res.render('links/listaEventos',{eventos: pilaEventos.getArray()});
 });
 
+
+
 // Links modulo Cliente
 router.get('/registroCliente',(req, res) =>{
     res.render('links/registroCliente');
@@ -102,5 +115,13 @@ router.get('/listaAdmins',(req, res) =>{
     res.render('links/listaAdmins');
 });
 
+
+
+//PROFILE
+
+router.get('/editProfile',(req, res) => {
+    res.send('----- Editar Perfil -----');
+    res.send('En construccion');
+});
 
 module.exports = router;

@@ -51,36 +51,6 @@ $(document).ready(function(){
             window.location=LinkExitSystem; 
         });  
     });
-    $('.search-book-button').click(function(e){
-        e.preventDefault();
-        var LinkSearchBook=$(this).attr("data-href");
-        swal({
-           title: "¿Qué libro estás buscando?",
-           text: "Por favor escribe el nombre del libro",
-           type: "input",   
-           showCancelButton: true,
-           closeOnConfirm: false,
-           animation: "slide-from-top",
-           cancelButtonText: "Cancelar",
-           confirmButtonText: "Buscar",
-           confirmButtonColor: "#3598D9",
-           inputPlaceholder: "Escribe aquí el nombre de libro" }, 
-      function(inputValue){
-           if (inputValue === false) return false;  
-
-           if (inputValue === "") {
-               swal.showInputError("Debes escribir el nombre del libro");     
-               return false;   
-           } 
-            window.location=LinkSearchBook+"?bookName="+inputValue;
-       });
-    });
-    $('.btn-help').on('click', function(){
-        $('#ModalHelp').modal({
-            show: true,
-            backdrop: "static"
-        });
-    });
 });
 (function($){
     $(window).load(function(){
