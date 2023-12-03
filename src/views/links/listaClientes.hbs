@@ -38,24 +38,25 @@
         <div class="table-responsive">
             <div class="div-table" style="margin:0 !important;">
                 <div class="div-table-row div-table-row-list" style="background-color:#DFF0D8; font-weight:bold;">
-                    <div class="div-table-cell" style="width: 6%;">#</div>
-                    <div class="div-table-cell" style="width: 18%;">NIE</div>
-                    <div class="div-table-cell" style="width: 18%;">Apellidos</div>
+                    <div class="div-table-cell" style="width: 6%;">Id</div>
+                    <div class="div-table-cell" style="width: 18%;">Cedula</div>
                     <div class="div-table-cell" style="width: 18%;">Nombres</div>
-                    <div class="div-table-cell" style="width: 18%;">Sección</div>
+                    <div class="div-table-cell" style="width: 18%;">Usuario</div>
+                    <div class="div-table-cell" style="width: 18%;">Correo</div>
                     <div class="div-table-cell" style="width: 9%;">Actualizar</div>
                     <div class="div-table-cell" style="width: 9%;">Eliminar</div>
                 </div>
             </div>
         </div>
+        {{#each clientes}}
         <div class="table-responsive">
             <div class="div-table" style="margin:0 !important;">
                 <div class="div-table-row div-table-row-list">
-                    <div class="div-table-cell" style="width: 6%;">#</div>
-                    <div class="div-table-cell" style="width: 18%;">NIE</div>
-                    <div class="div-table-cell" style="width: 18%;">Apellidos</div>
-                    <div class="div-table-cell" style="width: 18%;">Nombres</div>
-                    <div class="div-table-cell" style="width: 18%;">Sección</div>
+                    <div class="div-table-cell" style="width: 6%;">{{idUsuario}}</div>
+                    <div class="div-table-cell" style="width: 18%;">{{Cedula}}</div>
+                    <div class="div-table-cell" style="width: 18%;">{{Nombre}}</div>
+                    <div class="div-table-cell" style="width: 18%;">{{Usuario}}</div>
+                    <div class="div-table-cell" style="width: 18%;">{{Correo}}</div>
                     <div class="div-table-cell" style="width: 9%;">
                         <button class="btn btn-success"><i class="zmdi zmdi-refresh"></i></button>
                     </div>
@@ -65,74 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="table-responsive">
-            <div class="div-table" style="margin:0 !important;">
-                <div class="div-table-row div-table-row-list">
-                    <div class="div-table-cell" style="width: 6%;">#</div>
-                    <div class="div-table-cell" style="width: 18%;">NIE</div>
-                    <div class="div-table-cell" style="width: 18%;">Apellidos</div>
-                    <div class="div-table-cell" style="width: 18%;">Nombres</div>
-                    <div class="div-table-cell" style="width: 18%;">Sección</div>
-                    <div class="div-table-cell" style="width: 9%;">
-                        <button class="btn btn-success"><i class="zmdi zmdi-refresh"></i></button>
-                    </div>
-                    <div class="div-table-cell" style="width: 9%;">
-                        <button class="btn btn-danger"><i class="zmdi zmdi-delete"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="table-responsive">
-            <div class="div-table" style="margin:0 !important;">
-                <div class="div-table-row div-table-row-list">
-                    <div class="div-table-cell" style="width: 6%;">#</div>
-                    <div class="div-table-cell" style="width: 18%;">NIE</div>
-                    <div class="div-table-cell" style="width: 18%;">Apellidos</div>
-                    <div class="div-table-cell" style="width: 18%;">Nombres</div>
-                    <div class="div-table-cell" style="width: 18%;">Sección</div>
-                    <div class="div-table-cell" style="width: 9%;">
-                        <button class="btn btn-success"><i class="zmdi zmdi-refresh"></i></button>
-                    </div>
-                    <div class="div-table-cell" style="width: 9%;">
-                        <button class="btn btn-danger"><i class="zmdi zmdi-delete"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="table-responsive">
-            <div class="div-table" style="margin:0 !important;">
-                <div class="div-table-row div-table-row-list">
-                    <div class="div-table-cell" style="width: 6%;">#</div>
-                    <div class="div-table-cell" style="width: 18%;">NIE</div>
-                    <div class="div-table-cell" style="width: 18%;">Apellidos</div>
-                    <div class="div-table-cell" style="width: 18%;">Nombres</div>
-                    <div class="div-table-cell" style="width: 18%;">Sección</div>
-                    <div class="div-table-cell" style="width: 9%;">
-                        <button class="btn btn-success"><i class="zmdi zmdi-refresh"></i></button>
-                    </div>
-                    <div class="div-table-cell" style="width: 9%;">
-                        <button class="btn btn-danger"><i class="zmdi zmdi-delete"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="table-responsive">
-            <div class="div-table" style="margin:0 !important;">
-                <div class="div-table-row div-table-row-list">
-                    <div class="div-table-cell" style="width: 6%;">#</div>
-                    <div class="div-table-cell" style="width: 18%;">NIE</div>
-                    <div class="div-table-cell" style="width: 18%;">Apellidos</div>
-                    <div class="div-table-cell" style="width: 18%;">Nombres</div>
-                    <div class="div-table-cell" style="width: 18%;">Sección</div>
-                    <div class="div-table-cell" style="width: 9%;">
-                        <button class="btn btn-success"><i class="zmdi zmdi-refresh"></i></button>
-                    </div>
-                    <div class="div-table-cell" style="width: 9%;">
-                        <button class="btn btn-danger"><i class="zmdi zmdi-delete"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{/each}}
     </div>
     {{> footer }}
 </div>

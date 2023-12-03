@@ -98,8 +98,16 @@ router.get('/registroCliente', isLoggedIn, isAdmin,(req, res) =>{
     res.render('links/registroCliente');
 });
 
-router.get('/listaClientes', isLoggedIn, isAdmin, (req, res) =>{
-    res.render('links/listaClientes');
+router.get('/listaClientes', isLoggedIn, isAdmin, async (req, res) =>{
+    const clientes = await pool.query('SELECT * FROM usuario WHERE Rol = "Cliente"');
+    
+    const cedula = await pool.query('SELECT * FROM cliente');
+
+    for(var i = 0; i < clientes.length; i++){
+        clientes[i].Cedula = cedula[i].Cedula;
+    }
+
+    res.render('links/listaClientes',{clientes: clientes});
 });
 
 // Links modulo Organizador
@@ -107,8 +115,17 @@ router.get('/registroOrg', isLoggedIn, isAdmin, (req, res) =>{
     res.render('links/registroOrg');
 });
 
-router.get('/listaOrg', isLoggedIn, isAdmin, (req, res) =>{
-    res.render('links/listaOrg');
+router.get('/listaOrg', isLoggedIn, isAdmin, async (req, res) =>{
+    const organizadores = await pool.query('SELECT * FROM usuario WHERE Rol = "Organizador"');
+    
+    const otrosDatos = await pool.query('SELECT * FROM organizador');
+
+    for(var i = 0; i < organizadores.length; i++){
+        organizadores[i].organizacion = otrosDatos[i].organizacion;
+        organizadores[i].telefono = otrosDatos[i].telefono;
+    }
+
+    res.render('links/listaOrg',{item: organizadores});
 });
 
 // Links modulo Administrador
@@ -116,8 +133,10 @@ router.get('/registroAdmin', isLoggedIn, isAdmin,(req, res) =>{
     res.render('links/registroAdmin');
 });
 
-router.get('/listaAdmins', isLoggedIn, isAdmin,(req, res) =>{
-    res.render('links/listaAdmins');
+router.get('/listaAdmins', isLoggedIn, isAdmin,async (req, res) =>{
+    const admins = await pool.query('SELECT * FROM usuario WHERE Rol = "Administrador"');
+    
+    res.render('links/listaAdmins',{item: admins});
 });
 
 
@@ -125,8 +144,18 @@ router.get('/listaAdmins', isLoggedIn, isAdmin,(req, res) =>{
 //PROFILE
 
 router.get('/editProfile', isLoggedIn, (req, res) => {
-    res.send('----- Editar Perfil -----');
-    res.send('En construccion');
+    res.render('links/editProfile');
 });
 
+router.post('/editProfile',async (req, res) => {
+    const nuevaInfo = req.body;
+    nuevaInfo.idUsuario = req.user.idUsuario;
+    nuevaInfo.Rol = req.user.Rol;
+
+    const result = await pool.query('UPDATE usuario SET `Nombre` = "'+nuevaInfo.Nombre+'", `Usuario` = "'+nuevaInfo.Usuario+'", `Clave` = "'+nuevaInfo.Clave+'", `Correo` = "'+nuevaInfo.Correo+'" WHERE `usuario`.`idUsuario` = '+nuevaInfo.idUsuario);
+    
+    res.redirect('/home');
+
+    
+});
 module.exports = router;
