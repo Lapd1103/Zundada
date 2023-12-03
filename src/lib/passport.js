@@ -24,10 +24,10 @@ passport.use('local.login', new LocalStrategy({
         if(clave === user.Clave){
             done(null, user, req.flash('success','Welcome' + user.Nombre));
         }else{
-            done(null, false, req.flash('message','Contraseña incorrecta'));
+            done(null, false, req.flash('message','Nombre de usuario o contraseña incorrecta'));
         }
     }else{
-        return done(null,false, req.flash('message','El nombre de usuario no existe'));
+        return done(null,false, req.flash('message','Nombre de usuario o contraseña incorrecta'));
     }
 }));
 
@@ -46,7 +46,7 @@ passport.use('local.signIn', new LocalStrategy({
         Correo :correo,
         Rol: 'Cliente'
     };
-    //newCliente.clave = await helpers.encryptPassword(clave);
+    //newCliente.Clave = await helpers.encryptPassword(clave);
 
     const {insertId} = await pool.query('INSERT INTO usuario SET ?', [newCliente]);
     const result = await pool.query("INSERT INTO cliente(Cedula,idUsuarioCliente) VALUES ('"+cedula+"',(SELECT idUsuario FROM usuario WHERE Usuario='"+usuario+"'));");

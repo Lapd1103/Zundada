@@ -18,10 +18,16 @@
                 <li>
                     <div class="dropdown-menu-button"><i class="zmdi zmdi-cocktail zmdi-hc-fw"></i>&nbsp;&nbsp; Eventos <i class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw icon-sub-menu"></i></div>
                     <ul class="list-unstyled">
+                        {{#if_equal user.Rol "Administrador"}}
                         <li><a href="/registroEvento"><i class="zmdi zmdi-star-circle zmdi-hc-fw"></i>&nbsp;&nbsp; Registrar evento</a></li>
+                        {{/if_equal}}
+                        {{#if_equal user.Rol "Organizador"}}
+                        <li><a href="/registroEvento"><i class="zmdi zmdi-star-circle zmdi-hc-fw"></i>&nbsp;&nbsp; Registrar evento</a></li>
+                        {{/if_equal}}
                         <li><a href="/listaEventos"><i class="zmdi zmdi-pizza zmdi-hc-fw"></i>&nbsp;&nbsp; Lista de eventos</a></li>
                     </ul>
                 </li>
+                {{#if_equal user.Rol "Administrador"}}
                 <li>
                     <div class="dropdown-menu-button"><i class="zmdi zmdi-face zmdi-hc-fw"></i>&nbsp;&nbsp; Clientes <i class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw icon-sub-menu"></i></div>
                     <ul class="list-unstyled">
@@ -43,6 +49,7 @@
                         <li><a href="/listaAdmins"><i class="zmdi zmdi-accounts-list zmdi-hc-fw"></i>&nbsp;&nbsp; Lista de Administradores</a></li>
                     </ul>
                 </li>
+                {{/if_equal}}
             </ul>
         </div>
     </div>

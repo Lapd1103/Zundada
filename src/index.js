@@ -9,6 +9,7 @@ const passport = require('passport');
 
 const { database } = require('./keys');
 
+
 //initialization
 const app = express();
 require('./lib/passport');
@@ -21,7 +22,16 @@ app.engine('.hbs', engine({
   layoutsDir: path.join(app.get('views'), 'layouts'),
   partialsDir: path.join(app.get('views'), 'partials'),
   extname: '.hbs',
-  helpers: require('./lib/handlebars')
+  helpers: require('./lib/handlebars'),
+  helpers: {
+    if_equal: function (a, b, opts) {
+      if (a == b) {
+        return opts.fn(this);
+      } else {
+        return opts.inverse(this);
+      }
+    }
+  }
 }))
 app.set('view engine', '.hbs');
 
@@ -33,8 +43,10 @@ app.use(session({
   store: new MySQLStore(database)
 }));
 app.use(flash());
+
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
 
 app.use(passport.initialize());
@@ -44,6 +56,7 @@ app.use(passport.session());
 app.use((req, res, next) => {
   app.locals.success = req.flash('success');
   app.locals.message = req.flash('message');
+  app.locals.user = req.user;
   next();
 });
 

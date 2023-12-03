@@ -16,6 +16,7 @@
                 <div class="tile-num full-reset">&nbsp;</div>
             </a>
         </article>
+        {{#if_equal user.Rol "Administrador"}}
         <article class="tile">
             <a href="/listaClientes">
                 <div class="tile-icon full-reset"><i class="zmdi zmdi-face"></i></div>
@@ -38,6 +39,7 @@
                 <div class="tile-num full-reset">&nbsp;</div>
             </a>
         </article>
+        {{/if_equal}} 
     </section>
     {{> footer }}
 </div>

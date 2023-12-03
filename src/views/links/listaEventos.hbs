@@ -8,7 +8,12 @@
     </div>
     <div class="conteiner-fluid">
         <ul class="nav nav-tabs nav-justified"  style="font-size: 17px;">
+            {{#if_equal user.Rol "Administrador"}}
             <li role="presentation"><a href="/registroEvento">Registro</a></li>
+            {{/if_equal}} 
+            {{#if_equal user.Rol "Organizador"}}
+            <li role="presentation"><a href="/registroEvento">Registro</a></li>
+            {{/if_equal}} 
             <li role="presentation" class="active"><a href="/listaEventos">Lista de eventos</a></li>
         </ul>
     </div>

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { isLoggedIn, isAdmin , isOrganizador} = require('../lib/auth');
 
 const pila = require('../estructuras/pila');
 const minHeap = require('../estructuras/minHeap');
@@ -17,13 +18,16 @@ let eventosBST = new BinarySearchTree();
 //Conexión base de datos
 const pool = require('../database');
 
-router.get('/salir',(req,res) =>{
+router.get('/salir',(req, res, next) => {
     pilaEventos.updateDB("evento");
-    res.render('home');
+    req.logOut(req.user, err =>{
+        if(err) return next(err);
+        res.redirect('/login'); 
+    });
 });
 
 // Links modulo Evento
-router.get('/registroEvento',(req, res) =>{
+router.get('/registroEvento', isLoggedIn, isOrganizador, (req, res) =>{
     res.render('links/registroEvento');
 });
 
@@ -39,10 +43,11 @@ router.post('/registroEvento',(req, res) =>{
         Bdisponibles: numeroboletas 
     }
     pilaEventos.push(newEvento);
+    req.flash('success','Evento creado correctamente');
     res.render('links/registroEvento');
 });
 
-router.get('/listaEventos',(req, res) =>{   //Consulta de eventos por orden de creación
+router.get('/listaEventos', isLoggedIn, (req, res) =>{   //Consulta de eventos por orden de creación
     res.render('links/listaEventos',{eventos: pilaEventos.getArray()});
 });
 
@@ -52,14 +57,14 @@ router.get('/listaEventos',(req, res) =>{   //Consulta de eventos por orden de c
     res.send(req.body);
 });*/
 
-router.get('/listaEventosPriority',(req, res) =>{   //Consulta de eventos por prioridad
+router.get('/listaEventosPriority', isLoggedIn, (req, res) =>{   //Consulta de eventos por prioridad
     //pilaEventos.updateDB("evento"); //Actualizacion BD desde Pila
     heapEventos.loadData(); //Cargan los datos desde BD a minHeap
 
     res.render('links/listaEventosPriority',{eventos: heapEventos.getData()});
 });
 
-router.get('/deleteEvento/:id', async(req, res) => {
+router.get('/deleteEvento/:id', isLoggedIn, isOrganizador, async(req, res) => {
     const evento = req.params.id;
     pilaEventos.delete(evento);
 
@@ -67,7 +72,7 @@ router.get('/deleteEvento/:id', async(req, res) => {
 });
 
 
-router.get('/editEvento/:id', (req, res) => {
+router.get('/editEvento/:id', isLoggedIn, isOrganizador, (req, res) => {
     const idEvento = req.params.id;
 
     const evento = pilaEventos.getIndice(pilaEventos.find(idEvento));
@@ -89,29 +94,29 @@ router.post('/editEvento/:id', (req, res) => {
 
 
 // Links modulo Cliente
-router.get('/registroCliente',(req, res) =>{
+router.get('/registroCliente', isLoggedIn, isAdmin,(req, res) =>{
     res.render('links/registroCliente');
 });
 
-router.get('/listaClientes',(req, res) =>{
+router.get('/listaClientes', isLoggedIn, isAdmin, (req, res) =>{
     res.render('links/listaClientes');
 });
 
 // Links modulo Organizador
-router.get('/registroOrg',(req, res) =>{
+router.get('/registroOrg', isLoggedIn, isAdmin, (req, res) =>{
     res.render('links/registroOrg');
 });
 
-router.get('/listaOrg',(req, res) =>{
+router.get('/listaOrg', isLoggedIn, isAdmin, (req, res) =>{
     res.render('links/listaOrg');
 });
 
 // Links modulo Administrador
-router.get('/registroAdmin',(req, res) =>{
+router.get('/registroAdmin', isLoggedIn, isAdmin,(req, res) =>{
     res.render('links/registroAdmin');
 });
 
-router.get('/listaAdmins',(req, res) =>{
+router.get('/listaAdmins', isLoggedIn, isAdmin,(req, res) =>{
     res.render('links/listaAdmins');
 });
 
@@ -119,7 +124,7 @@ router.get('/listaAdmins',(req, res) =>{
 
 //PROFILE
 
-router.get('/editProfile',(req, res) => {
+router.get('/editProfile', isLoggedIn, (req, res) => {
     res.send('----- Editar Perfil -----');
     res.send('En construccion');
 });

@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const passport = require('passport');
+const { isLoggedIn , isNotLoggedIn} = require('../lib/auth');
 
-router.get('/login',(req, res) =>{
+router.get('/login', isNotLoggedIn, (req, res) =>{
     res.render('auth/login');
 });
 
@@ -15,7 +16,7 @@ router.post('/login', (req, res, next) =>{
     })(req, res, next);
 });
 
-router.get('/signIn',(req,res) =>{
+router.get('/signIn', isNotLoggedIn, (req,res) =>{
     res.render('auth/signIn');
 });
 
@@ -25,8 +26,9 @@ router.post('/signIn', passport.authenticate('local.signIn', {
     failureFlash: true
 }));
 
-router.get('/home', (req,res) =>{
+router.get('/home', isLoggedIn, (req,res) =>{
     res.render('home');
 });
+
 
 module.exports = router;
