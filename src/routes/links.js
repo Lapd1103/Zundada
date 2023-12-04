@@ -5,13 +5,14 @@ const { isLoggedIn, isAdmin , isOrganizador} = require('../lib/auth');
 const pila = require('../estructuras/pila');
 const minHeap = require('../estructuras/minHeap');
 const BinarySearchTree = require('../estructuras/BST');
+const HashTable = require('../estructuras/hash');
 
 let n = 1000;
 let pilaEventos = new pila(n);
 pilaEventos.loadData('evento');
 
 let heapEventos = new minHeap(n);
-
+let hashTable = new HashTable();
 let eventosBST = new BinarySearchTree();
 
 
@@ -170,6 +171,7 @@ router.post('/editProfile',async (req, res) => {
     const nuevaInfo = req.body;
     nuevaInfo.idUsuario = req.user.idUsuario;
     nuevaInfo.Rol = req.user.Rol;
+    nuevaInfo.Clave = hashTable.encodePasswordWithSalt(nuevaInfo.Clave);
 
     const result = await pool.query('UPDATE usuario SET `Nombre` = "'+nuevaInfo.Nombre+'", `Usuario` = "'+nuevaInfo.Usuario+'", `Clave` = "'+nuevaInfo.Clave+'", `Correo` = "'+nuevaInfo.Correo+'" WHERE `usuario`.`idUsuario` = '+nuevaInfo.idUsuario);
     

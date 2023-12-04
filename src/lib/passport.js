@@ -2,6 +2,10 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const pool = require('../database');
 const helpers = require('../lib/helpers');
+const HashTable = require('../estructuras/hash');
+
+let hashTable = new HashTable();
+
 
 //---- Login de usuarios ----
 passport.use('local.login', new LocalStrategy({
@@ -18,10 +22,10 @@ passport.use('local.login', new LocalStrategy({
         console.log(user.Clave);
         
         //IMPLEMENTACION CON HASH
-        //const validPassword = await helpers.matchPassword(clave, user.Clave);
-        //console.log(validPassword);
+        const validPassword = hashTable.matchPassword(clave, user.Clave);
+        console.log(validPassword);
 
-        if(clave === user.Clave){
+        if(validPassword){
             done(null, user, req.flash('success','Welcome' + user.Nombre));
         }else{
             done(null, false, req.flash('message','Nombre de usuario o contraseña incorrecta'));
@@ -46,7 +50,7 @@ passport.use('local.signIn', new LocalStrategy({
         Correo :correo,
         Rol: 'Cliente'
     };
-    //newCliente.Clave = await helpers.encryptPassword(clave);
+    newCliente.Clave = hashTable.encodePasswordWithSalt(clave);
 
     const {insertId} = await pool.query('INSERT INTO usuario SET ?', [newCliente]);
     const result = await pool.query("INSERT INTO cliente(Cedula,idUsuarioCliente) VALUES ('"+cedula+"',(SELECT idUsuario FROM usuario WHERE Usuario='"+usuario+"'));");
