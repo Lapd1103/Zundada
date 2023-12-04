@@ -91,7 +91,26 @@ router.post('/editEvento/:id', (req, res) => {
     res.render('links/listaEventos',{eventos: pilaEventos.getArray()});
 });
 
+router.get('/infoEvento/:id', isLoggedIn, (req, res) => {
+    const idEvento = req.params.id;
 
+    const evento = pilaEventos.getIndice(pilaEventos.find(idEvento));
+    console.log(evento);
+    res.render('links/infoEvento',{evento: evento});
+});
+
+router.post('/infoEvento/:id', isLoggedIn, async (req, res) => {
+    const idEvento = req.params.id;
+    
+    const evento = await pool.query('SELECT * FROM evento WHERE idEvento ='+idEvento);
+    
+    const valor = evento[0].Bdisponibles - req.body.boletasCompra;
+    const result = await pool.query('UPDATE evento SET Bdisponibles = '+valor+' WHERE evento.idEvento = '+idEvento);
+    
+    pilaEventos.comprarBoleta(idEvento, valor);
+    
+    res.redirect('https://wa.me/573227151450/?text=Buen%20dia,%20me%20gustaria%20comprar%20'+req.body.boletasCompra+'%20entradas%20para%20el%20evento '+evento[0].nombre);
+});
 
 // Links modulo Cliente
 router.get('/registroCliente', isLoggedIn, isAdmin,(req, res) =>{
@@ -135,7 +154,7 @@ router.get('/registroAdmin', isLoggedIn, isAdmin,(req, res) =>{
 
 router.get('/listaAdmins', isLoggedIn, isAdmin,async (req, res) =>{
     const admins = await pool.query('SELECT * FROM usuario WHERE Rol = "Administrador"');
-    
+
     res.render('links/listaAdmins',{item: admins});
 });
 

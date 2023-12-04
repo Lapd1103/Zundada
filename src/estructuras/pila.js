@@ -62,6 +62,11 @@ module.exports = class Pila {
         return i;
       }
     }
+
+    comprarBoleta(idEvento, boletas) {
+      const i = this.find(idEvento);
+      this.arr[i].Bdisponibles = boletas;
+    }
   
     //Actualiza cualquier objeto dentro del array
     updAny(objeto, nuevoValor) {

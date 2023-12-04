@@ -1,0 +1,71 @@
+{{> nav-lat }}
+<div class="content-page-container full-reset custom-scroll-containers">
+    {{> nav-sup}}
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="all-tittles">Sistema de eventos universitarios</h1>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="container-flat-form">
+            <div class="title-flat-form title-flat-blue">Información de evento</div>
+            <form class="form-padding" method="POST">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <legend><i class="zmdi zmdi-account-box"></i> &nbsp; Información básica</legend><br>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="group-material">
+                            <span class="titulo_info">Nombre</span><br>
+                            <span>{{evento.nombre}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="group-material">
+                            <span class="titulo_info">Lugar</span><br>
+                            <span>{{evento.lugar}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="group-material">
+                            <span class="titulo_info">Fecha</span><br>
+                            <span>{{evento.fecha}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="group-material">
+                            <span class="titulo_info">Hora</span><br>
+                            <span>{{evento.hora}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <legend><i class="zmdi zmdi-label"></i> &nbsp; Comprar boletas</legend><br>
+                    </div>
+                    
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="group-material">
+                            <span class="titulo_info">Boletas disponibles</span><br>
+                            <span>{{evento.Bdisponibles}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="group-material">
+                            <input type="number" value="1" name="boletasCompra" class="material-control tooltips-general" placeholder="Escribe aquí el número de boletas disponibles del evento" required=""  data-toggle="tooltip" data-placement="top" title="Solamente números, sin espacios">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Número de boletas</label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xs-12">
+                        <p class="text-center">
+                            <a href="https://drive.google.com/drive/u/0/"><button type="submit" class="btn btn-success"><i class="zmdi zmdi-money"></i> &nbsp;&nbsp; Comprar</button></a>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{> footer }}
+</div>
