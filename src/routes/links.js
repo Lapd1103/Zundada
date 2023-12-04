@@ -148,9 +148,53 @@ router.get('/listaOrg', isLoggedIn, isAdmin, async (req, res) =>{
     res.render('links/listaOrg',{item: organizadores});
 });
 
+router.get('/deleteAdmin/:id', isLoggedIn, isAdmin, async (req, res) => {
+    const admin = req.params.id;
+
+    const result = await pool.query('DELETE FROM usuario WHERE idUsuario = "'+admin+'"');
+    console.log(result);
+    res.render('links/registroAdmin');
+});
+
+router.get('/editAdmin/:id', isLoggedIn, isAdmin, async (req, res) => {
+    const idAdmin = req.params.id;
+
+    const admin = await pool.query('SELECT * FROM usuario WHERE idUsuario = '+idAdmin);
+
+    console.log(admin);
+    res.render('links/editAdmin',{admin: admin[0]});
+});
+
+router.post('/editAdmin/:id', async (req, res) => {
+    const idAdmin = req.params.id;
+    const admin = req.body;
+    admin.idUsuario = idAdmin;
+    admin.Clave = hashTable.encodePasswordWithSalt(admin.Clave);
+
+    const result = await pool.query('UPDATE usuario SET `Nombre`="'+admin.Nombre+'",Usuario="'+admin.Usuario+'",Clave="'+admin.Clave+'",Correo="'+admin.Correo+'" WHERE idUsuario='+admin.idUsuario);
+    console.log(result);
+    res.render('links/registroAdmin');
+});
+
+
 // Links modulo Administrador
 router.get('/registroAdmin', isLoggedIn, isAdmin,(req, res) =>{
     res.render('links/registroAdmin');
+});
+
+router.post('/registroAdmin', async (req, res) =>{
+    const {Nombre, Correo, Usuario, Clave} = req.body;
+    const newAdmin = {
+        Nombre,
+        Usuario,
+        Clave,
+        Correo,
+        Rol : 'Administrador'
+    } 
+    newAdmin.Clave = hashTable.encodePasswordWithSalt(newAdmin.Clave);
+    
+    const result = await pool.query('INSERT INTO `usuario`(`Nombre`, `Usuario`, `Clave`, `Correo`, `Rol`) VALUES ("'+newAdmin.Nombre+'","'+newAdmin.Usuario+'","'+newAdmin.Clave+'","'+newAdmin.Correo+'","'+newAdmin.Rol+'")');
+    res.redirect('/listaAdmins');
 });
 
 router.get('/listaAdmins', isLoggedIn, isAdmin,async (req, res) =>{

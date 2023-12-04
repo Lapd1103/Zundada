@@ -51,10 +51,10 @@
                 <div class="div-table-cell">{{Usuario}}</div>
                 <div class="div-table-cell">{{Correo}}</div>
                 <div class="div-table-cell">
-                    <button class="btn btn-success"><i class="zmdi zmdi-refresh"></i></button>
+                    <a href="/editAdmin/{{idUsuario}}"><button class="btn btn-success"><i class="zmdi zmdi-refresh"></i></button></a>
                 </div>
                 <div class="div-table-cell">
-                    <button class="btn btn-danger"><i class="zmdi zmdi-delete"></i></button>
+                    <a href="/deleteAdmin/{{idUsuario}}"><button class="btn btn-danger"><i class="zmdi zmdi-delete"></i></button></a>
                 </div>
             </div>
             {{/each}}

@@ -13,19 +13,9 @@
             <li role="presentation"><a href="/listaAdmins">Lista de Administradores</a></li>
         </ul>
     </div>
-    <div class="container-fluid"  style="margin: 50px 0;">
-        <div class="row">
-            <div class="col-xs-12 col-sm-4 col-md-3">
-                <img src="assets/img/user01.png" alt="user" class="img-responsive center-box" style="max-width: 110px;">
-            </div>
-            <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
-                Bienvenido a la sección para registrar nuevos administradores del sistema, debes de llenar todos los campos del siguiente formulario para registrar un administrador
-            </div>
-        </div>
-    </div>
     <div class="container-fluid">
         <div class="container-flat-form">
-            <div class="title-flat-form title-flat-blue">Registrar un nuevo administrador</div>
+            <div class="title-flat-form title-flat-blue">Editar información administrador</div>
             <form class="form-padding" method="POST">
                 <div class="row">
                     <div class="col-xs-12">
@@ -33,7 +23,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <div class="group-material">
-                            <input type="text" name="Nombre" class="material-control tooltips-general" placeholder="Nombre completo" required="" maxlength="70" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,70}" data-toggle="tooltip" data-placement="top" title="Escribe el nombre del administrador">
+                            <input type="text" name="Nombre" value="{{admin.Nombre}}" class="material-control tooltips-general" placeholder="Nombre completo" required="" maxlength="70" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,70}" data-toggle="tooltip" data-placement="top" title="Escribe el nombre del administrador">
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>Nombre completo</label>
@@ -41,7 +31,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <div class="group-material">
-                            <input type="email" name="Correo" class="material-control tooltips-general" required="" placeholder="E-mail"  maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe el Email del administrador">
+                            <input type="email" name="Correo" value="{{admin.Correo}}" class="material-control tooltips-general" required="" placeholder="E-mail"  maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe el Email del administrador">
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>Email</label>
@@ -52,7 +42,7 @@
                     </div>
                     <div class="col-xs-12">
                         <div class="group-material">
-                            <input type="text" name="Usuario" class="material-control tooltips-general input-check-user" placeholder="Nombre de usuario" required="" maxlength="20" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]{1,20}" data-toggle="tooltip" data-placement="top" title="Escribe un nombre de usuario sin espacios, que servira para iniciar sesión">
+                            <input type="text" name="Usuario" value="{{admin.Usuario}}" class="material-control tooltips-general input-check-user" placeholder="Nombre de usuario" required="" maxlength="20" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]{1,20}" data-toggle="tooltip" data-placement="top" title="Escribe un nombre de usuario sin espacios, que servira para iniciar sesión">
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>Nombre de usuario</label>
@@ -64,14 +54,6 @@
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>Contraseña</label>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6">
-                        <div class="group-material">
-                            <input type="password" class="material-control tooltips-general" placeholder="Repite la contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Repite la contraseña">
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Repetir contraseña</label>
                         </div>
                     </div>
                     <div class="col-xs-12">
